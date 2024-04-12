@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings({"checkstyle:MissingJavadocType", "checkstyle:Indentation"})
@@ -32,17 +33,30 @@ public class StoreService {
     }
 
     public void createStore(Store store) {
-        storeRepository.save(store);
+        Optional<List<Store>> storeOptionalList = storeRepository.findStoreByStoreName(store.getStoreName());
+        if(storeOptionalList.isPresent()){
+            List<Store> storeList = storeOptionalList.get();
+            for (Store st : storeList) {
+                if (st.getLocation().equalsIgnoreCase(store.getLocation())) {//if name && location are same -> error
+                    throw new IllegalStateException("A store with the same name already exists at the same location.");
+                }
+            }
+        }
+        storeRepository.save(store); //(name already exists or not) && location is diff -> save
     }
 
-    public Store updateStore(Long storeId, Store updatedStore) throws NotFoundException {
+    public Store updateStore(Long storeId, Store updatedStore, boolean updateName, boolean updateLocation) throws NotFoundException {
         Optional<Store> existingStore = getStoreById(storeId);
         if (existingStore.isEmpty()) {
-            throw new NotFoundException("Store not found with ID: " + storeId);
+            throw new NotFoundException("Store with ID: " + storeId + " does not exist");
         }
         Store storeToUpdate = existingStore.get();
-        storeToUpdate.setStoreName(updatedStore.getStoreName());
-        storeToUpdate.setLocation(updatedStore.getLocation());
+        if (updateName) {
+            storeToUpdate.setStoreName(updatedStore.getStoreName());
+        }
+        if (updateLocation) {
+            storeToUpdate.setLocation(updatedStore.getLocation());
+        }
         return storeRepository.save(storeToUpdate);
     }
 }

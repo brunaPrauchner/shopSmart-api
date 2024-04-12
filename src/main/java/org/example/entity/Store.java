@@ -47,4 +47,13 @@ public class Store {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "storeId=" + storeId +
+                ", storeName='" + storeName + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }
