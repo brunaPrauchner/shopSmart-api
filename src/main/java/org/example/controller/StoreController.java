@@ -32,46 +32,37 @@ public class StoreController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
     @PostMapping("/createStore")
-    public ResponseEntity<Store> createStore(@RequestBody Store store) {
+    public ResponseEntity<?> createStore(@RequestBody Store store) {
        storeService.createStore(store);
        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateStore/{storeId}")
-    public ResponseEntity<Store> updateStore(@PathVariable Long storeId, @RequestBody Store store) throws NotFoundException {
-        Optional<Store> existingStore = storeService.getStoreById(storeId);
-        if (existingStore.isPresent()) {
-            Store updatedStore = storeService.updateStore(storeId, store, true, true);
-            return new ResponseEntity<>(updatedStore, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 
-    @PutMapping("/updateStoreName/{storeId}")
-    public ResponseEntity<Store> updateStoreName(@PathVariable Long storeId, @RequestBody Store store) throws NotFoundException {
-        Optional<Store> existingStore = storeService.getStoreById(storeId);
-        if (existingStore.isPresent()) {
-            Store updatedStore = storeService.updateStore(storeId, store, true, false);
+    @PutMapping("/updateStore/{storeId}")
+    public ResponseEntity<Store> updateStoreWithParams(@PathVariable Long storeId,
+                                             @RequestBody Store store,
+                                             @RequestParam(required = false, defaultValue = "true") boolean updateName,
+                                             @RequestParam(required = false, defaultValue = "true") boolean updateLocation) throws NotFoundException {
+
+
+            Store updatedStore = storeService.updateStore(storeId, store, updateName, updateLocation);
             return new ResponseEntity<>(updatedStore, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
+
+    }
+    @PutMapping("/updateStoreName/{storeId}")
+    public ResponseEntity<Store> updateStoreName(@PathVariable Long storeId,
+                                                 @RequestBody Store store) throws NotFoundException {
+        return updateStoreWithParams(storeId, store, true, false);
     }
 
     @PutMapping("/updateStoreLocation/{storeId}")
-    public ResponseEntity<Store> updateStoreLocation(@PathVariable Long storeId, @RequestBody Store store) throws NotFoundException {
-        Optional<Store> existingStore = storeService.getStoreById(storeId);
-        if (existingStore.isPresent()) {
-            Store updatedStore = storeService.updateStore(storeId, store, false, true);
-            return new ResponseEntity<>(updatedStore, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Store> updateStoreLocation(@PathVariable Long storeId,
+                                                     @RequestBody Store store) throws NotFoundException {
+        return updateStoreWithParams(storeId, store, false, true);
     }
 
     @DeleteMapping("/{storeId}")
