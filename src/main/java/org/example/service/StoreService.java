@@ -48,7 +48,7 @@ public class StoreService {
     public Store updateStore(Long storeId, Store updatedStore, boolean updateName, boolean updateLocation) throws NotFoundException {
         Optional<Store> existingStore = getStoreById(storeId);
         if (existingStore.isEmpty()) {
-            throw new NotFoundException("Store with ID: " + storeId + " does not exist");
+            throw new NotFoundException("Store with ID " + storeId + " does not exist");
         }
         Store storeToUpdate = existingStore.get();
         if (updateName) {
