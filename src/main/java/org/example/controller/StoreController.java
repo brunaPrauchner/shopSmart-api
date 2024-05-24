@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @SuppressWarnings({"checkstyle:MissingJavadocType", "checkstyle:Indentation"})
 @RestController
 public class StoreController {
+    private final StoreService storeService;
 
     @Autowired
-    private StoreService storeService;
+    public StoreController(StoreService storeService) {
+        this.storeService = storeService;
+    }
 
    @GetMapping("/stores")
     public ResponseEntity<List<Store>> getAllStores() {
