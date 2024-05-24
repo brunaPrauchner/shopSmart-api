@@ -1,0 +1,14 @@
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\entity\PurchaseProductPk.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\repository\PurchaseProductRepository.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\repository\StoreRepository.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\exception\CustomErrorResponse.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\entity\Purchase.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\entity\Product.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\Application.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\entity\PurchaseProduct.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\controller\StoreController.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\repository\ProductRepository.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\exception\GlobalExceptionHandler.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\service\StoreService.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\entity\Store.java
+C:\Users\Bruna\Desktop\shopSmart-api\src\main\java\org\example\repository\PurchaseRepository.java
